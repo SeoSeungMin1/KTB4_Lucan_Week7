@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <button id="backButton" class="back-button">&lt;</button>
+
+    <h2>아무 말 대잔치</h2>
+
+    <div class="profile-menu-wrapper">
+        <div class="profile-image" id="profileImage"></div>
+
+        <div class="profile-dropdown" id="profileDropdown">
+            <button id="editProfileMenu">회원정보수정</button>
+            <button id="editPasswordMenu">비밀번호수정</button>
+            <button id="logoutButton">로그아웃</button>
+        </div>
+    </div>
+</header>
+
+<main class="post-detail-container">
+
+    <section class="post-detail-header">
+        <h2 id="postTitle">제목 1</h2>
+
+        <div class="post-detail-info">
+
+    <div class="writer-info">
+        <div class="writer-profile"></div>
+        <span id="postNickname">작성자1</span>
+    </div>
+
+    <span id="postCreatedAt">2026-06-28</span>
+
+</div>
+
+        <div class="post-detail-buttons">
+            <button id="editButton">수정</button>
+            <button id="deleteButton">삭제</button>
+        </div>
+    </section>
+
+    <section class="post-detail-content">
+        <img id="postImage" class="post-image" src="" alt="게시글 이미지">
+        <p id="postContent">
+            게시글 상세 내용입니다.
+        </p>
+    </section>
+
+    <section class="like-section">
+    <button id="likeButton" class="like-button">♡</button>
+    </section>
+
+
+    <section class="post-count-section">
+        <div>
+            <strong id="likeCount">0</strong>
+            <p>좋아요수</p>
+        </div>
+        <div>
+            <strong id="viewCount">10</strong>
+            <p>조회수</p>
+        </div>
+        <div>
+            <strong id="commentCount">2</strong>
+            <p>댓글</p>
+        </div>
+    </section>
+
+    <section class="comment-write-section">
+        <textarea id="commentInput" placeholder="댓글을 남겨주세요!"></textarea>
+        <button id="commentButton">댓글 등록</button>
+    </section>
+
+    <section id="commentList" class="comment-list">
+    
+    </section>
+
+
+</main>
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <h3>게시글을 삭제하시겠습니까?</h3>
+        <p>삭제한 내용은 복구할 수 없습니다.</p>
+
+        <div class="modal-buttons">
+            <button id="cancelDeleteButton">취소</button>
+            <button id="confirmDeleteButton">확인</button>
+        </div>
+    </div>
+</div>
+
+<div id="commentDeleteModal" class="modal">
+    <div class="modal-content">
+        <h3>댓글을 삭제하시겠습니까?</h3>
+        <p>삭제한 내용은 복구할 수 없습니다.</p>
+
+        <div class="modal-buttons">
+            <button id="cancelCommentDeleteButton">취소</button>
+            <button id="confirmCommentDeleteButton">확인</button>
+        </div>
+    </div>
+</div>
+
+<script src="../js/post-detail.js"></script>
+
+</body>
+
+</html>

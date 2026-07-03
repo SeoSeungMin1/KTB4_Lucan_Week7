@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 작성</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <button id="backButton" class="back-button">&lt;</button>
+
+    <h2>아무 말 대잔치</h2>
+
+    <div class="profile-menu-wrapper">
+        <div class="profile-image" id="profileImage"></div>
+
+        <div class="profile-dropdown" id="profileDropdown">
+            <button type="button" id="editProfileMenu">회원정보수정</button>
+            <button type="button" id="editPasswordMenu">비밀번호수정</button>
+            <button type="button" id="logoutButton">로그아웃</button>
+        </div>
+    </div>
+</header>
+
+<main class="post-create-container">
+
+    <h2 class="page-title">게시글 작성</h2>
+
+    <form class="post-create-form">
+
+        <label for="title">제목</label>
+        <input
+            type="text"
+            id="title"
+            placeholder="제목을 입력해주세요."
+        >
+
+        <label for="content">내용</label>
+        <textarea
+            id="content"
+            placeholder="내용을 입력해주세요."
+        ></textarea>
+        <p class="helper-text">* helper text</p>
+        <div class="image-upload">
+    <label for="imageInput">이미지</label>
+    <input type="file" id="imageInput" accept="image/*">
+</div>
+
+        <button type="button" id="submitButton">작성하기</button>
+
+    </form>
+
+</main>
+
+<script src="../js/post-create.js"></script>
+
+</body>
+
+</html>
