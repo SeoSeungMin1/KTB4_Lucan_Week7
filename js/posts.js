@@ -13,7 +13,11 @@ const logoutButton = document.querySelector("#logoutButton");
 let currentPage = 0;
 
 async function loadPosts(page) {
-    const response = await fetch(`http://localhost:8080/posts?page=${page}&size=10`);
+    const response = await fetch(`http://localhost:8080/posts?page=${page}&size=10`, {
+        method: "GET",
+        credentials: "include"
+    });
+
     const result = await response.json();
 
     postList.innerHTML = "";
@@ -98,7 +102,18 @@ editPasswordMenu.addEventListener("click", function () {
     location.href = "./edit-password.html";
 });
 
-logoutButton.addEventListener("click", function () {
+logoutButton.addEventListener("click", async function (event) {
+    event.stopPropagation();
+
+    console.log("로그아웃 클릭됨");
+
+    const response = await fetch("http://localhost:8080/users/logout", {
+        method: "POST",
+        credentials: "include"
+    });
+
+    console.log("로그아웃 응답:", response.status);
+
     localStorage.clear();
     location.href = "./login.html";
 });

@@ -39,7 +39,16 @@ let deleteCommentId = null;
 loadPost();
 
 async function loadPost() {
-    const response = await fetch(`http://localhost:8080/posts/${postId}`);
+
+    const userId = Number(localStorage.getItem("userId"));
+
+    const response = await fetch(`http://localhost:8080/posts/${postId}?userId=${userId}`,
+        {
+            method: "GET",
+            credentials: "include"
+        }
+    );
+
     const result = await response.json();
 
     const post = result.data;
@@ -56,8 +65,8 @@ async function loadPost() {
     commentCountElement.textContent = post.commentCount;
 
     const createdTime = post.createdAt
-    .replace("T", " ")
-    .split(".")[0];
+        .replace("T", " ")
+        .split(".")[0];
 
     const updatedTime = post.updatedAt
         .replace("T", " ")
@@ -66,8 +75,7 @@ async function loadPost() {
     if (createdTime === updatedTime) {
         createdAtElement.textContent = createdTime;
     } else {
-        createdAtElement.textContent =
-        updatedTime + " (수정됨)";
+        createdAtElement.textContent = updatedTime + " (수정됨)";
     }
 
     if (post.imageFile === null || post.imageFile === "") {
@@ -81,7 +89,10 @@ async function loadPost() {
 loadComments();
 
 async function loadComments() {
-    const response = await fetch(`http://localhost:8080/posts/${postId}/comments`);
+    const response = await fetch(`http://localhost:8080/posts/${postId}/comments`, {
+        method: "GET",
+        credentials: "include"
+    });
     const result = await response.json();
 
     commentList.innerHTML = "";
@@ -142,7 +153,8 @@ commentButton.addEventListener("click", async function () {
             body: JSON.stringify({
                 content: commentInput.value,
                 userId: Number(localStorage.getItem("userId"))
-            })
+            }),
+            credentials: "include"  
         }
     );
 
@@ -181,6 +193,7 @@ confirmDeleteButton.addEventListener("click", async function () {
             body: JSON.stringify({
                 userId: Number(localStorage.getItem("userId"))
             })
+            ,credentials: "include"
         }
     );
 
@@ -204,7 +217,8 @@ likeButton.addEventListener("click", async function () {
             },
             body: JSON.stringify({
                 userId: Number(localStorage.getItem("userId"))
-            })
+            }),
+            credentials: "include"
         }
     );
 
@@ -260,7 +274,8 @@ commentList.addEventListener("click", async function (event) {
                 body: JSON.stringify({
                     content: commentEditInput.value,
                     userId: Number(localStorage.getItem("userId"))
-                })
+                }),
+                credentials: "include"
             }
         );
 
@@ -295,7 +310,8 @@ confirmCommentDeleteButton.addEventListener("click", async function () {
             },
             body: JSON.stringify({
                 userId: Number(localStorage.getItem("userId"))
-            })
+            }),
+            credentials: "include"
         }
     );
 
@@ -329,7 +345,12 @@ editPasswordMenu.addEventListener("click", function () {
     location.href = "./edit-password.html";
 });
 
-logoutButton.addEventListener("click", function () {
+logoutButton.addEventListener("click", async function () {
+    await fetch("http://localhost:8080/users/logout", {
+        method: "POST",
+        credentials: "include"
+    });
+
     localStorage.clear();
     location.href = "./login.html";
 });

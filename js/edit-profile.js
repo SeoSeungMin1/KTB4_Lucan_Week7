@@ -43,7 +43,12 @@ editPasswordMenu.addEventListener("click", function () {
     location.href = "./edit-password.html";
 });
 
-logoutButton.addEventListener("click", function () {
+logoutButton.addEventListener("click", async function () {
+    await fetch("http://localhost:8080/users/logout", {
+        method: "POST",
+        credentials: "include"
+    });
+
     localStorage.clear();
     location.href = "./login.html";
 });
@@ -95,7 +100,8 @@ profileSubmitButton.addEventListener("click", async function () {
             body: JSON.stringify({
                 nickname: nickname,
                 profileImage: selectedProfileImage
-            })
+            }),
+            credentials: "include"
         }
     );
 
@@ -133,7 +139,8 @@ confirmDeleteButton.addEventListener("click", async function () {
     const response = await fetch(
         `http://localhost:8080/users/${userId}`,
         {
-            method: "DELETE"
+            method: "DELETE",
+            credentials: "include"
         }
     );
 

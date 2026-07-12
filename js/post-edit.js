@@ -17,6 +17,8 @@ const imageInput = document.querySelector("#imageInput");
 
 const helperText = document.querySelector(".helper-text");
 
+const userId = Number(localStorage.getItem("userId"));
+
 backButton.addEventListener("click", function () {
     location.href = `./post-detail.html?postId=${postId}`;
 });
@@ -33,7 +35,12 @@ editPasswordMenu.addEventListener("click", function () {
     location.href = "./edit-password.html";
 });
 
-logoutButton.addEventListener("click", function () {
+logoutButton.addEventListener("click", async function () {
+    await fetch("http://localhost:8080/users/logout", {
+        method: "POST",
+        credentials: "include"
+    });
+
     localStorage.clear();
     location.href = "./login.html";
 });
@@ -65,10 +72,12 @@ editSubmitButton.addEventListener("click", async function (event) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
+            userId : userId,
             title: titleInput.value,
             content: contentInput.value,
             imageFile: imageFile
-        })
+        }),
+        credentials: "include"
     });
 
     if (response.ok) {

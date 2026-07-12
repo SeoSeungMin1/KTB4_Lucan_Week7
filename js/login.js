@@ -22,32 +22,32 @@ loginButton.addEventListener("click", async function () {
         return;
     }
 
+    const params = new URLSearchParams();
+    params.append("email", emailInput.value);
+    params.append("password", passwordInput.value);
+
     const response = await fetch("http://localhost:8080/users/login", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: JSON.stringify({
-            email: emailInput.value,
-            password: passwordInput.value
-        })
+        body: params,
+        credentials: "include"
     });
+
+    if (!response.ok) {
+        passwordHelperText.textContent =
+            "*이메일 또는 비밀번호가 일치하지 않습니다.";
+        return;
+    }
 
     const result = await response.json();
 
-console.log("로그인 응답:", result);
+    localStorage.setItem("userId", result.data.userId);
+    localStorage.setItem("email", result.data.email);
+    localStorage.setItem("nickname", result.data.nickname);
 
-if (!response.ok) {
-    passwordHelperText.textContent =
-        "*이메일 또는 비밀번호가 일치하지 않습니다.";
-    return;
-}
-
-localStorage.setItem("userId", result.data.userId);
-localStorage.setItem("email", result.data.email);
-localStorage.setItem("nickname", result.data.nickname);
-
-location.href = "./posts.html";
+    location.href = "./posts.html";
 });
 
 signupButton.addEventListener("click", function () {

@@ -30,7 +30,12 @@ editPasswordMenu.addEventListener("click", function () {
     location.href = "./edit-password.html";
 });
 
-logoutButton.addEventListener("click", function () {
+logoutButton.addEventListener("click", async function () {
+    await fetch("http://localhost:8080/users/logout", {
+        method: "POST",
+        credentials: "include"
+    });
+
     localStorage.clear();
     location.href = "./login.html";
 });
@@ -55,7 +60,8 @@ passwordSubmitButton.addEventListener("click", function () {
             currentPassword,
             password,
             passwordConfirm
-        })
+        }),
+        credentials: "include"
     })
         .then(response => response.json())
         .then(result => {
@@ -79,11 +85,6 @@ passwordSubmitButton.addEventListener("click", function () {
 
             if (result.message === "password_not_match") {
                 passwordConfirmHelper.textContent = "*비밀번호와 다릅니다.";
-                return;
-            }
-
-            if (result.message === "password_too_short") {
-                passwordHelper.textContent = "*비밀번호는 8자 이상이어야 합니다.";
                 return;
             }
         });

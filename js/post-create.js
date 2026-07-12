@@ -29,7 +29,12 @@ editPasswordMenu.addEventListener("click", function () {
     location.href = "./edit-password.html";
 });
 
-logoutButton.addEventListener("click", function () {
+logoutButton.addEventListener("click",  async function () {
+    await fetch("http://localhost:8080/users/logout", {
+        method: "POST",
+        credentials: "include"
+    });
+
     localStorage.clear();
     location.href = "./login.html";
 });
@@ -65,7 +70,8 @@ submitButton.addEventListener("click", async function (event) {
             content: contentInput.value,
             imageFile: imageFile,
             userId: Number(localStorage.getItem("userId"))
-        })
+        }),
+        credentials: "include"
     });
 
     if (!response.ok) {
