@@ -1,53 +1,159 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
+
     <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>게시글 수정</title>
+
     <link rel="stylesheet" href="../css/style.css">
+
 </head>
+
+
 <body>
 
-<div class="page-wrapper">
 
-    <header class="header">
-        <button id="backButton" class="back-button">&lt;</button>
+<header class="header">
 
-        <h2>아무 말 대잔치</h2>
-        
-        <div class="profile-menu-wrapper">
+
+    <button id="backButton" class="back-button">
+        &lt;
+    </button>
+
+
+    <h2>
+        ⚾ BallTalk
+    </h2>
+
+
+
+    <div class="profile-menu-wrapper">
+
+
         <div class="profile-image" id="profileImage"></div>
 
+
+
         <div class="profile-dropdown" id="profileDropdown">
-            <button id="editProfileMenu">회원정보수정</button>
-            <button id="editPasswordMenu">비밀번호수정</button>
-            <button id="logoutButton">로그아웃</button>
+
+
+            <button id="editProfileMenu">
+                회원정보수정
+            </button>
+
+
+            <button id="editPasswordMenu">
+                비밀번호수정
+            </button>
+
+
+            <button id="logoutButton">
+                로그아웃
+            </button>
+
+
         </div>
+
+
     </div>
-    </header>
 
-    <main class="edit-main">
-        <h2 class="edit-title">게시글 수정</h2>
 
-        <form class="edit-form">
-            <label for="title">제목*</label>
-            <input type="text" id="title" value="">
+</header>
 
-            <label for="content">내용*</label>
-            <textarea id="content" placeholder=""></textarea>
 
-            <p class="helper-text">* helper text</p>
 
-            <div class="image-box">
-                <label for="imageInput">이미지</label>
-                <input type="file" id="imageInput" accept="image/*">
-            </div>
 
-            <button type="button" id="editSubmitButton">수정하기</button>
-        </form>
-    </main>
 
-</div>
+<main class="post-create-container">
+
+
+    <h2 class="page-title">
+        게시글 수정
+    </h2>
+
+
+
+    <form class="post-create-form">
+
+
+        <label for="title">
+            제목
+        </label>
+
+
+        <input
+            type="text"
+            id="title"
+            placeholder="제목을 입력해주세요."
+        >
+
+
+
+
+
+        <label for="content">
+            내용
+        </label>
+
+
+
+        <textarea
+            id="content"
+            placeholder="내용을 입력해주세요."
+        ></textarea>
+
+
+
+
+        <p class="helper-text"></p>
+
+
+
+
+
+        <div class="image-upload">
+
+
+            <label for="imageInput">
+                이미지
+            </label>
+
+
+            <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+            >
+
+
+        </div>
+
+
+
+
+
+        <button
+            type="button"
+            id="editSubmitButton"
+        >
+            수정하기
+        </button>
+
+
+
+    </form>
+
+
+</main>
+
 
 <script src="../js/post-edit.js"></script>
+
+
 </body>
+
 </html>

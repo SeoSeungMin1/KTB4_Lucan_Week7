@@ -7,15 +7,16 @@ const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
 const passwordConfirmInput = document.querySelector("#passwordConfirm");
 const nicknameInput = document.querySelector("#nickname");
+const favoriteTeamSelect = document.querySelector("#favoriteTeam");
 
 const signupToast = document.querySelector("#signupToast");
 
 const profileHelperText = document.querySelector("#profileHelperText");
-
 const emailHelperText = document.querySelector("#emailHelperText");
 const passwordHelperText = document.querySelector("#passwordHelperText");
 const passwordConfirmHelperText = document.querySelector("#passwordConfirmHelperText");
 const nicknameHelperText = document.querySelector("#nicknameHelperText");
+const favoriteTeamHelperText = document.querySelector("#favoriteTeamHelperText");
 
 backButton.addEventListener("click", function () {
     location.href = "./login.html";
@@ -32,6 +33,7 @@ signupButton.addEventListener("click", async function () {
     passwordHelperText.textContent = "";
     passwordConfirmHelperText.textContent = "";
     nicknameHelperText.textContent = "";
+    favoriteTeamHelperText.textContent = "";
 
     if (emailInput.value.trim() === "") {
         emailHelperText.textContent = "*이메일을 입력해주세요.";
@@ -46,7 +48,9 @@ signupButton.addEventListener("click", async function () {
     if (passwordConfirmInput.value.trim() === "") {
         passwordConfirmHelperText.textContent = "*비밀번호를 한번 더 입력해주세요.";
         return;
-    } else if (passwordInput.value !== passwordConfirmInput.value) {
+    }
+
+    if (passwordInput.value !== passwordConfirmInput.value) {
         passwordConfirmHelperText.textContent = "*비밀번호가 다릅니다.";
         return;
     }
@@ -56,8 +60,12 @@ signupButton.addEventListener("click", async function () {
         return;
     }
 
+    if (favoriteTeamSelect.value === "") {
+        favoriteTeamHelperText.textContent = "*응원팀을 선택해주세요.";
+        return;
+    }
 
-    const response = await fetch("http://localhost:8080/users/signup", {
+    const response = await fetch("http://127.0.0.1:8080/users/signup", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -67,6 +75,7 @@ signupButton.addEventListener("click", async function () {
             password: passwordInput.value,
             passwordConfirm: passwordConfirmInput.value,
             nickname: nicknameInput.value,
+            favoriteTeam: favoriteTeamSelect.value,
             profileImage: null
         })
     });
@@ -77,24 +86,22 @@ signupButton.addEventListener("click", async function () {
 
     if (!response.ok) {
 
-    if (result.message === "email_already_exists") {
-        emailHelperText.textContent = "*중복된 이메일입니다.";
+        if (result.message === "email_already_exists") {
+            emailHelperText.textContent = "*중복된 이메일입니다.";
+        }
+
+        if (result.message === "nickname_already_exists") {
+            nicknameHelperText.textContent = "*중복된 닉네임입니다.";
+        }
+
+        return;
     }
 
-    if (result.message === "nickname_already_exists") {
-        nicknameHelperText.textContent = "*중복된 닉네임입니다.";
-    }
+    signupToast.classList.add("show");
 
-    return;
-}
-
-    if (response.ok) {
-        signupToast.classList.add("show");
-
-        setTimeout(function () {
-            signupToast.classList.remove("show");
-        }, 3000);
-    }
+    setTimeout(function () {
+        location.href = "./login.html";
+    }, 1000);
 });
 
 loginText.addEventListener("click", function () {

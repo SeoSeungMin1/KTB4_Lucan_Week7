@@ -36,7 +36,7 @@ editPasswordMenu.addEventListener("click", function () {
 });
 
 logoutButton.addEventListener("click", async function () {
-    await fetch("http://localhost:8080/users/logout", {
+    await fetch("http://127.0.0.1:8080/users/logout", {
         method: "POST",
         credentials: "include"
     });
@@ -66,7 +66,7 @@ editSubmitButton.addEventListener("click", async function (event) {
         imageFile = "../images/IMG_7563.JPG";
     }
 
-    const response = await fetch(`http://localhost:8080/posts/${postId}`, {
+    const response = await fetch(`http://127.0.0.1:8080/posts/${postId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"

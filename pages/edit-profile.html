@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>회원정보수정</title>
+    <title>회원정보 수정</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -10,58 +10,94 @@
 <header class="header">
     <button id="backButton" class="back-button">&lt;</button>
 
-    <h2>아무 말 대잔치</h2>
+    <h2>⚾ BallTalk</h2>
 
     <div class="profile-menu-wrapper">
         <div class="profile-image" id="profileImage"></div>
 
         <div class="profile-dropdown" id="profileDropdown">
-            <button type="button" id="editProfileMenu">회원정보수정</button>
-            <button type="button" id="editPasswordMenu">비밀번호수정</button>
+            <button type="button" id="editProfileMenu">회원정보 수정</button>
+            <button type="button" id="editPasswordMenu">비밀번호 수정</button>
             <button type="button" id="logoutButton">로그아웃</button>
         </div>
     </div>
 </header>
 
 <main class="edit-profile-main">
-    <h1>회원정보수정</h1>
+
+    <h1>회원정보 수정</h1>
 
     <form class="edit-profile-form">
-        <label>프로필 사진*</label>
+
+        <label>프로필 사진</label>
 
         <div class="profile-upload" id="profileUpload">
             <span>변경</span>
         </div>
 
-        <input type="file" id="profileInput" accept="image/*" hidden>
+        <input
+                type="file"
+                id="profileInput"
+                accept="image/*"
+                hidden
+        >
 
         <label>이메일</label>
-        <p class="email-text">startupcode@gmail.com</p>
+
+        <p class="email-text" id="emailText">
+            startupcode@gmail.com
+        </p>
 
         <label for="nickname">닉네임</label>
-        <input type="text" id="nickname" value="스타트업코드">
+
+        <input
+                type="text"
+                id="nickname"
+                placeholder="닉네임을 입력하세요"
+        >
 
         <p class="helper-text" id="nicknameHelperText"></p>
 
-        <button type="button" id="profileSubmitButton">수정하기</button>
-        <button type="button" id="deleteUserButton">회원 탈퇴</button>
+        <button type="button" id="profileSubmitButton">
+            수정하기
+        </button>
+
+        <button type="button" id="deleteUserButton">
+            회원 탈퇴
+        </button>
+
     </form>
 
-    <div class="toast" id="toast">수정완료</div>
+    <div class="toast" id="toast">
+        수정 완료
+    </div>
+
 </main>
 
-<div class="modal-background hidden" id="deleteModal">
-    <div class="profile-modal">
-        <h2>회원탈퇴 하시겠습니까?</h2>
-        <p>탈퇴 후 계정 정보는 복구할 수 없습니다.</p>
+<!-- 회원 탈퇴 모달 -->
+<div class="modal" id="deleteModal">
 
-        <div class="profile-modal-buttons">
-            <button type="button" id="cancelDeleteButton">취소</button>
-            <button type="button" id="confirmDeleteButton">확인</button>
+    <div class="modal-content">
+
+        <h3>회원 탈퇴</h3>
+
+        <p>탈퇴 후 계정은 복구할 수 없습니다.</p>
+
+        <div class="modal-buttons">
+            <button type="button" id="cancelDeleteButton">
+                취소
+            </button>
+
+            <button type="button" id="confirmDeleteButton">
+                확인
+            </button>
         </div>
+
     </div>
+
 </div>
 
 <script src="../js/edit-profile.js"></script>
+
 </body>
 </html>

@@ -26,7 +26,7 @@ loginButton.addEventListener("click", async function () {
     params.append("email", emailInput.value);
     params.append("password", passwordInput.value);
 
-    const response = await fetch("http://localhost:8080/users/login", {
+    const response = await fetch("http://127.0.0.1:8080/users/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"

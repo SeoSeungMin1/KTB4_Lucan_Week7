@@ -13,7 +13,7 @@ const logoutButton = document.querySelector("#logoutButton");
 let currentPage = 0;
 
 async function loadPosts(page) {
-    const response = await fetch(`http://localhost:8080/posts?page=${page}&size=10`, {
+    const response = await fetch(`http://127.0.0.1:8080/posts?page=${page}&size=10`, {
         method: "GET",
         credentials: "include"
     });
@@ -47,9 +47,9 @@ async function loadPosts(page) {
                 <h3>${displayTitle}</h3>
 
                 <div class="post-info">
-                    <span>좋아요 ${post.likeCount}</span>
-                    <span>댓글 ${post.commentCount}</span>
-                    <span>조회수 ${post.viewCount}</span>
+                    <span>❤️ ${post.likeCount}</span>
+                    <span>💬 ${post.commentCount}</span>
+                    <span>👁️ ${post.viewCount}</span>
                 </div>
 
                 <div class="post-footer">
@@ -105,14 +105,11 @@ editPasswordMenu.addEventListener("click", function () {
 logoutButton.addEventListener("click", async function (event) {
     event.stopPropagation();
 
-    console.log("로그아웃 클릭됨");
 
-    const response = await fetch("http://localhost:8080/users/logout", {
+    const response = await fetch("http://127.0.0.1:8080/users/logout", {
         method: "POST",
         credentials: "include"
     });
-
-    console.log("로그아웃 응답:", response.status);
 
     localStorage.clear();
     location.href = "./login.html";

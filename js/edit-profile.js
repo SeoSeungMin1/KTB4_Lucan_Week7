@@ -44,7 +44,7 @@ editPasswordMenu.addEventListener("click", function () {
 });
 
 logoutButton.addEventListener("click", async function () {
-    await fetch("http://localhost:8080/users/logout", {
+    await fetch("http://127.0.0.1:8080/users/logout", {
         method: "POST",
         credentials: "include"
     });
@@ -91,7 +91,7 @@ profileSubmitButton.addEventListener("click", async function () {
     const userId = Number(localStorage.getItem("userId"));
 
     const response = await fetch(
-        `http://localhost:8080/users/${userId}`,
+        `http://127.0.0.1:8080/users/${userId}`,
         {
             method: "PATCH",
             headers: {
@@ -126,18 +126,18 @@ profileSubmitButton.addEventListener("click", async function () {
     }, 2000);
 });
 deleteUserButton.addEventListener("click", function () {
-    deleteModal.classList.remove("hidden");
+    deleteModal.style.display = "flex";
 });
 
 cancelDeleteButton.addEventListener("click", function () {
-    deleteModal.classList.add("hidden");
+    deleteModal.style.display = "none";
 });
 
 confirmDeleteButton.addEventListener("click", async function () {
     const userId = Number(localStorage.getItem("userId"));
 
     const response = await fetch(
-        `http://localhost:8080/users/${userId}`,
+        `http://127.0.0.1:8080/users/${userId}`,
         {
             method: "DELETE",
             credentials: "include"

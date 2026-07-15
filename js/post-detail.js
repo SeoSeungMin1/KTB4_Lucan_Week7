@@ -42,7 +42,7 @@ async function loadPost() {
 
     const userId = Number(localStorage.getItem("userId"));
 
-    const response = await fetch(`http://localhost:8080/posts/${postId}?userId=${userId}`,
+    const response = await fetch(`http://127.0.0.1:8080/posts/${postId}?userId=${userId}`,
         {
             method: "GET",
             credentials: "include"
@@ -89,7 +89,7 @@ async function loadPost() {
 loadComments();
 
 async function loadComments() {
-    const response = await fetch(`http://localhost:8080/posts/${postId}/comments`, {
+    const response = await fetch(`http://127.0.0.1:8080/posts/${postId}/comments`, {
         method: "GET",
         credentials: "include"
     });
@@ -117,6 +117,9 @@ async function loadComments() {
                     <div class="writer-info">
                         <div class="writer-profile"></div>
                         <span>${comment.nickname}</span>
+                        <span class="post-team">
+                            ${comment.team}
+                        </span>
                     </div>
 
                     <span>${displayTime}</span>
@@ -144,7 +147,7 @@ commentButton.addEventListener("click", async function () {
     }
 
     const response = await fetch(
-        `http://localhost:8080/posts/${postId}/comments`,
+        `http://127.0.0.1:8080/posts/${postId}/comments`,
         {
             method: "POST",
             headers: {
@@ -175,7 +178,7 @@ editButton.addEventListener("click", function () {
 });
 
 deleteButton.addEventListener("click", function () {
-    deleteModal.style.display = "block";
+    deleteModal.style.display = "flex";
 });
 
 cancelDeleteButton.addEventListener("click", function () {
@@ -184,7 +187,7 @@ cancelDeleteButton.addEventListener("click", function () {
 
 confirmDeleteButton.addEventListener("click", async function () {
     const response = await fetch(
-        `http://localhost:8080/posts/${postId}`,
+        `http://127.0.0.1:8080/posts/${postId}`,
         {
             method: "DELETE",
             headers: {
@@ -209,7 +212,7 @@ confirmDeleteButton.addEventListener("click", async function () {
 
 likeButton.addEventListener("click", async function () {
     const response = await fetch(
-        `http://localhost:8080/posts/${postId}/likes`,
+        `http://127.0.0.1:8080/posts/${postId}/likes`,
         {
             method: liked ? "DELETE" : "POST",
             headers: {
@@ -265,7 +268,7 @@ commentList.addEventListener("click", async function (event) {
         const commentId = commentCard.dataset.id;
 
         const response = await fetch(
-            `http://localhost:8080/posts/${postId}/comments/${commentId}`,
+            `http://127.0.0.1:8080/posts/${postId}/comments/${commentId}`,
             {
                 method: "PATCH",
                 headers: {
@@ -292,7 +295,7 @@ commentList.addEventListener("click", async function (event) {
 
     deleteCommentId = commentCard.dataset.id;
 
-    commentDeleteModal.style.display = "block";
+    commentDeleteModal.style.display = "flex";
     }
 });
 
@@ -302,7 +305,7 @@ cancelCommentDeleteButton.addEventListener("click", function () {
 
 confirmCommentDeleteButton.addEventListener("click", async function () {
     const response = await fetch(
-        `http://localhost:8080/posts/${postId}/comments/${deleteCommentId}`,
+        `http://127.0.0.1:8080/posts/${postId}/comments/${deleteCommentId}`,
         {
             method: "DELETE",
             headers: {
@@ -346,7 +349,7 @@ editPasswordMenu.addEventListener("click", function () {
 });
 
 logoutButton.addEventListener("click", async function () {
-    await fetch("http://localhost:8080/users/logout", {
+    await fetch("http://127.0.0.1:8080/users/logout", {
         method: "POST",
         credentials: "include"
     });
